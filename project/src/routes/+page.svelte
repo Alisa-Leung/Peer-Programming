@@ -2,7 +2,6 @@
     let interests = $state([]);
     function update(){
         interests.push(document.getElementById("interestsField").value);
-
     }
 </script>
 
