@@ -1,11 +1,21 @@
 <script lang="ts">
-    let interests = $state([]);
+    import { onMount } from "svelte";
+    let interests:string[] = $state([]);
+
+    onMount(()=>{
+        console.log("Mounted");
+        document.getElementById("button")?.addEventListener("click", update);
+    })
+
     function update(){
-        interests.push(document.getElementById("interestsField").value);
+        let stuff = (document.getElementById("interestsField") as HTMLInputElement).value;
+        if( stuff == null || stuff === "") return;
+        interests.push(stuff);
+
     }
 </script>
 
 <h1>Welcome to my page!</h1>
 <input type="text" id="interestsField"/>
-<button id="button" onclick={update}>Enter Interest</button>
+<button id="button" >Enter Interest</button>
 <p id="interestsParagraph">My interests are: {interests.reduce((a: string, b: string) =>a + b + ", ", "").slice(0, -2)}</p>
